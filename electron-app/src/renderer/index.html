@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prism</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            keyframes: {
+              'fade-scale': {
+                '0%': { 
+                  opacity: '0',
+                  transform: 'translateY(-50%) scale(0.95)'
+                },
+                '100%': { 
+                  opacity: '1',
+                  transform: 'translateY(-50%) scale(1)'
+                }
+              }
+            },
+            animation: {
+              'fade-scale': 'fade-scale 0.2s ease-out'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        body {
+            background-color: transparent !important;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            color: white;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+        #root {
+            background-color: transparent !important;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="bundle.js"></script>
+</body>
+</html>

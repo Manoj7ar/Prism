@@ -1,0 +1,30 @@
+fastapi>=0.115.0
+uvicorn>=0.32.0
+google-generativeai>=0.8.0
+google-genai>=1.0.0
+pyautogui>=0.9.54
+Pillow>=10.4.0
+pyperclip>=1.9.0
+PyPDF2>=3.0.1
+pydantic>=2.10.4
+python-dotenv>=1.0.0
+python-multipart>=0.0.12
+requests>=2.32.0
+aiohttp>=3.10.0
+psutil>=6.0.0
+
+# Cross-platform support
+pywin32>=306; sys_platform == 'win32'
+
+# Browser automation
+playwright>=1.48.0
+
+# OCR (visual memory)
+opencv-python>=4.10.0
+numpy>=1.26.0
+easyocr>=1.7.2
+
+# Voice (optional)
+pvporcupine>=3.0.0
+pyaudio>=0.2.14
+sounddevice>=0.5.0

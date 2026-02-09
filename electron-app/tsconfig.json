@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "CommonJS",
+      "lib": ["DOM", "ESNext"],
+      "jsx": "react-jsx",
+      "strict": true,
+      "noImplicitAny": false,
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "dist",
+      "rootDir": "src",
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/renderer/*"],
+        "react": ["node_modules/react"],
+        "react-dom": ["node_modules/react-dom"]
+      },
+      "typeRoots": ["node_modules/@types"]
+    },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/renderer/components/ui/calendar.tsx", "src/renderer/components/ui/chart.tsx", "src/renderer/components/ui/form.tsx", "src/renderer/components/ui/input-otp.tsx", "src/renderer/components/ui/resizable.tsx", "src/renderer/components/ui/sidebar.tsx"]
+}

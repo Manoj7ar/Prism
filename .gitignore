@@ -1,0 +1,74 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Electron
+electron-app/release/
+electron-app/dist/
+*.exe
+*.dmg
+*.AppImage
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.eggs/
+*.egg-info/
+*.egg
+
+# Session data (privacy)
+session_memory/
+python-backend/session_memory/*.png
+python-backend/session_memory/*.json
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Test artifacts
+test_*.png
+test_*.txt
+*_test_output.txt
+*.test.js.snap
+
+# Misc
+*.local
+.orchids/
+.tokens/
+.vercel
+electron-app/.restore_from_build/
+node_modules/
+electron-app/node_modules/
+python-backend/__pycache__/

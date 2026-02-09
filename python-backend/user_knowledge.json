@@ -1,0 +1,74 @@
+{
+    "app_shortcuts": {
+        "chrome": [
+            "Open YouTube",
+            "New Tab",
+            "Search Google"
+        ],
+        "notepad": [
+            "New Note",
+            "Save File"
+        ],
+        "explorer": [
+            "Open Downloads",
+            "Open Documents",
+            "New Folder"
+        ],
+        "code": [
+            "Open Project",
+            "New File",
+            "Run Terminal"
+        ],
+        "discord": [
+            "Check Mentions",
+            "Join Voice"
+        ],
+        "spotify": [
+            "Next Track",
+            "Play/Pause",
+            "Liked Songs"
+        ]
+    },
+    "usage_stats": {
+        "electron": {
+            "Provide a list of available actions and their descriptions.": 1
+        },
+        "explorer": {
+            "Press Windows key + E to open File Explorer.": 1,
+            "Reply to the user with a clarification of the ambiguous query.": 1,
+            "Open the Chrome browser": 1,
+            "Navigate to Google search for '10 minute timer' to start a timer in Chrome.": 1,
+            "Respond to the user's greeting.": 2,
+            "Reply with the dates and location of the 2026 World Cup.": 1,
+            "Open Spotify.": 1,
+            "Open Spotify": 1,
+            "Open the Chrome browser.": 2,
+            "Reply with the dates of the 2026 World Cup.": 1,
+            "Navigate to Google to search for an easy pasta recipe.": 1,
+            "Click the 'Send' button to send your email.": 1
+        },
+        "orchids": {
+            "Open YouTube in Chrome.": 1,
+            "Navigate to the TechCrunch website to gather the latest news.": 1,
+            "Extract the main content from the TechCrunch homepage.": 1
+        },
+        "chrome": {
+            "Open Spotify in Chrome": 1,
+            "Navigate to techcrunch.com and extract the latest news headlines and summaries.": 1,
+            "Open the Chrome browser.": 1,
+            "Extract the link from the google search result for pasta recipe.": 1,
+            "Navigating to the recipe website from the extracted link.": 1,
+            "Extract the recipe text from the website.": 1,
+            "Navigate to techcrunch.com to summarize the latest news.": 1,
+            "Extract the latest news from techcrunch.com.": 1,
+            "Click the 'Send' button to send your email.": 1
+        },
+        "searchhost": {
+            "Open the Notepad application.": 1,
+            "Type 'Hello World' in the Notepad window.": 1,
+            "Open Notepad to save the recipe.": 1,
+            "Type the recipe into the Notepad file.": 1,
+            "Email the recipe to the user.": 1
+        }
+    }
+}
