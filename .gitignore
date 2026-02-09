@@ -72,3 +72,7 @@ electron-app/.restore_from_build/
 node_modules/
 electron-app/node_modules/
 python-backend/__pycache__/
+.env
+python-backend/*.png
+python-backend/session_memory/
+python-backend/temp/
