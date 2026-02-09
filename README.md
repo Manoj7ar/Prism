@@ -2,144 +2,115 @@
   <img src="electron-app/assets/icon_512.png" alt="Prism Logo" width="140" />
 </p>
 <h1 align="center">Prism</h1>
-<p align="center"><strong>Windows Desktop AI Agent</strong></p>
 
-# Prism
+<p align="center">
+  <strong>Windows Desktop AI Agent powered by Google Gemini 3</strong>
+</p>
 
-Prism is a desktop AI assistant with:
-- an Electron desktop UI (`electron-app`)
-- a FastAPI automation backend (`python-backend`)
-- multimodal planning/execution using Gemini + local desktop/browser automation
+### Overview
 
-## Architecture
+Prism is a windows desktop ai agent that can understand what is on your screen and safely automate real tasks across applications. It combines an electron overlay ui with a fastapi backend and a tool execution loop powered by the google-gemini-3-api.
+
+Prism supports two high level behaviors:
+- chat for direct questions and summaries
+- task execution for multi step desktop automation with streaming progress, verification, and recovery
+
+---
+
+## How-it-works
+
+Prism is built as two cooperating services:
 
 - `electron-app`
-- always-on-top desktop shell, tray integration, global shortcuts, renderer chat UI
-- talks to backend over HTTP/SSE (`http://127.0.0.1:8000`)
+  - always on top desktop shell
+  - tray integration and global shortcut
+  - chat ui with task bubbles
+  - communicates with the backend over http and server-sent-events at `http://127.0.0.1:8000`
 
 - `python-backend`
-- FastAPI service for planning, execution, streaming task updates, memory/session capture
-- desktop automation via PyAutoGUI + Windows integrations
-- browser automation via keyboard/URL flows and Playwright-backed actions
+  - fastapi service for intent routing, planning, execution, streaming updates, and session capture
+  - desktop automation using pyautogui plus windows specific actions
+  - browser automation using keyboard and url flows and playwright actions
+  - visual memory capture and visual-dom scanning endpoints
 
-## Implemented Features
+high level execution loop
+1. accept a user command in the ui
+2. route into a fast path or a strict task path
+3. plan actions with gemini and structured outputs
+4. execute actions locally on the desktop or in the browser
+5. stream task progress to the ui
+6. verify outcomes and retry when needed
 
-### Core execution
-- Natural language command execution (`/execute`, `/execute-stream`)
-- Streaming task progress and reply chunks over SSE
-- Preset workflow execution (`/execute-preset`)
-- Stop/reset controls (`/stop`, `/reset`)
+---
 
-### Fast and strict intent paths
-- Fast direct chat path (question-style prompts)
-- Fast app open path (`open/launch/start <app>`)
-- Strict browser navigation path (`open <browser> and go to <site>`)
-- Strict attached-file summary -> new Google Doc path (`https://docs.new`)
-- Strict attached-file send -> WhatsApp Web path (`https://web.whatsapp.com`)
+## Features
 
-### Desktop automation actions
-- Open/focus apps and windows
-- Click/type/scroll/drag/drop
-- Tab/window navigation, back/forward/refresh, address-bar navigation
-- System actions (including Windows Bluetooth toggle)
-- File attachment helpers:
-- select file in dialog
-- copy file to clipboard and paste
+### core-execution
+- natural language command execution via `/execute` and `/execute-stream`
+- real time streaming task progress and reply chunks over server-sent-events
+- preset workflow execution via `/execute-preset`
+- stop and reset controls via `/stop` and `/reset`
 
-### File workflows
-- Attach files from UI (picker + drag/drop)
-- Supports document-centric flows (read/summarize and downstream actions)
-- Attachment bubble lifecycle in UI
+### fast-and-strict-intent-paths
+- fast direct chat path for question style prompts
+- fast app open path for `open launch start <app>`
+- strict browser navigation path for `open <browser> and go to <site>`
+- strict attached file summarize then open google doc flow using `https://docs.new`
+- strict attached file send flow using whatsapp web `https://web.whatsapp.com`
 
-### Visual memory
-- Periodic screenshot session capture (default every `15s`)
-- OCR + redaction integration
-- Memory status endpoint (`/memory-status`)
-- Toggle endpoint (`/memory-toggle`)
-- Clear endpoint (`/memory-clear`)
-- Auto wipe by time window (default `180 min`)
-- Auto reset when storage cap is exceeded (default `500 MB`)
+### desktop-automation-actions
+- open and focus apps and windows
+- click type scroll drag drop
+- tab and window navigation, back forward refresh, address bar navigation
+- system actions including windows bluetooth toggle
+- file attachment helpers
+  - select a file in a dialog
+  - copy file to clipboard and paste
 
-### Visual understanding
-- Screen analysis and summarization actions
-- Visual DOM scan/endpoints:
-- `/visual-dom/scan`
-- `/visual-dom/elements`
-- `/visual-dom/interactive`
-- `/visual-dom/forms`
-- `/visual-dom/find`
-- `/visual-dom/overlay`
+### file-workflows
+- attach files from the ui using picker and drag drop
+- document centric flows for read summarize and downstream actions
+- attachment bubble lifecycle in the ui
 
-### Electron UX
-- Global shortcut support (`Alt+Space`)
-- Settings panel, API-key setup flow, task/status UI
-- Automation overlay support from main process IPC
+### visual-memory
+- periodic screenshot session capture default every `15s`
+- ocr and redaction integration
+- endpoints
+  - `/memory-status`
+  - `/memory-toggle`
+  - `/memory-clear`
+- auto wipe by time window default `180 min`
+- auto reset when storage cap is exceeded default `500 MB`
 
-## API Surface (Backend)
+### visual-understanding and visual-dom
+- screen analysis and summarization actions
+- visual-dom scan and query endpoints
+  - `/visual-dom/scan`
+  - `/visual-dom/elements`
+  - `/visual-dom/interactive`
+  - `/visual-dom/forms`
+  - `/visual-dom/find`
+  - `/visual-dom/overlay`
 
-Main endpoints in `python-backend/main.py`:
-- `/health`
-- `/execute`
-- `/execute-stream`
-- `/execute-preset`
-- `/tasks`
-- `/thinking/events`
-- `/screenshot/events`
-- `/stop`
-- `/reset`
-- `/settings`
-- `/settings/fast-mode`
-- `/memory-status`
-- `/memory-toggle`
-- `/memory-clear`
-- `/tokens`
-- `/active-app`
-- `/context`
-- `/set-key`
-- `/check-auth`
-- `/visual-dom/*`
+### electron-ux
+- global shortcut support default `alt+space`
+- settings panel and api key setup flow
+- task and status ui with streaming updates
+- automation overlay support through main process ipc
 
-## Prerequisites
+---
 
-- Windows (primary supported automation target)
-- Python 3.11 recommended
-- Node.js + npm
-- Google Gemini API key
+## Quickstart-windows
 
-Optional:
-- Bun (not required for current baseline run command)
+### prerequisites
+- windows 10 or 11
+- python 3.11 recommended
+- nodejs and npm
+- google-gemini-api-key from google-ai-studio
 
-## Local Run
+### 1 start-backend
+from a terminal
 
-### 1) Start backend
 ```powershell
-cd C:\Users\manoj\orchids-projects\Prism\python-backend
-C:\Users\manoj\AppData\Local\Programs\Python\Python311\python.exe -u main.py
-```
-
-### 2) Start Electron UI
-```powershell
-cd C:\Users\manoj\orchids-projects\Prism\electron-app
-npx electron .
-```
-
-## Configuration
-
-Expected backend env values (from `python-backend/config.py` usage):
-- `GEMINI_API_KEY` (required)
-- `GEMINI_MODEL` (optional override)
-- `CORS_ORIGINS` (optional)
-
-## Notes
-
-- This repo currently runs Electron directly from `npx electron .` in local development.
-- Backend must be reachable at `127.0.0.1:8000`.
-- If automation appears stuck, verify active app/window focus and backend logs in `python-backend`.
-
-## Repository Layout
-
-```text
-Prism/
-  electron-app/      # Electron shell + renderer UI
-  python-backend/    # FastAPI backend + automation + visual memory
-```
+cd python-backend
+python -u main.py
