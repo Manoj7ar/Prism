@@ -101,13 +101,54 @@ high level execution loop
 ---
 
 ## Quickstart-windows
-
 ### prerequisites
 - windows 10 or 11
 - python 3.11 recommended
 - nodejs and npm
 - google-gemini-api-key from google-ai-studio
+````md
+## setup
+### prerequisites
+- windows 10 or 11
+- python 3.11
+- nodejs and npm
+- google-gemini-api-key from google-ai-studio
 
+### 1 clone-the-repo
+```powershell
+git clone https://github.com/Manoj7ar/Prism.git
+cd Prism
+````
+### 2 configure-env
+create a file at `python-backend/.env` and add:
+```text
+GEMINI_API_KEY=your_key_here
+GEMINI_MODEL=gemini-3.0-flash
+CORS_ORIGINS=http://127.0.0.1:3000
+```
+### 3 install-and-run-backend
+open terminal 1:
+```powershell
+cd python-backend
+pip install -r requirements.txt
+python -u main.py
+```
+confirm the backend is running:
+* `http://127.0.0.1:8000/health`
+
+### 4 install-and-run-electron-ui
+open terminal 2:
+```powershell
+cd electron-app
+npm install
+npx electron .
+```
+### 5 quick-test
+in prism, try:
+
+* `open chrome and go to https://example.com`
+* `summarize what is on my screen`
+* attach a pdf and run `summarize this file in five bullets`
 ---
 
 ### License
